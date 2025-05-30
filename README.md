@@ -45,3 +45,29 @@ And a more detailed agentic workflow:
  * ```generate_answer```: Node for generating the final answer.
  * ```decide_to_generate```: Conditional node to decide between rewriting the query (and performing web search) or generating an answer based on document relevance.
 + Agent Graph Construction: The LangGraph ```StateGraph``` is used to define the nodes and edges, creating the flow of the agent.
+
+## Example Queries and Outputs
+The notebook demonstrates the system's behavior with different types of queries:
+
++ "what is the capital of India?": This query triggers retrieval from the local DB, but since not all retrieved documents are relevant, the system performs a web search and then generates a more comprehensive answer.
+
+```bash
+Markdown
+
+The capital city of India is New Delhi. It is located in the north-central part of the country, to the west of the Yamuna River. New Delhi serves as the seat of the central government of India and is part of the National Capital Territory of Delhi.
+```
+
++ "who won the champions league in 2024?": This query is unlikely to find relevant information in the Wikipedia subset, so it triggers a web search to provide an accurate, up-to-date answer.
+```bash
+Markdown
+
+The winner of the 2024 UEFA Champions League was Real Madrid. They defeated Borussia Dortmund 2-0 in the final match held at Wembley Stadium in London, England, on June 1, 2024.
+```
+
++ "Tell me about India": This query is well-covered by the local Wikipedia data, so the system directly generates an answer based on the retrieved documents without resorting to a web search.
+```bash
+Markdown
+
+India is a country located in Asia, specifically at the center of South Asia. It is the seventh largest country in the world by area and the largest in South Asia. With a population exceeding 1.2 billion people, India is the second most populous country globally and holds the title of the most populous democracy in the world. The capital city of India is New Delhi.
+... (full detailed answer)
+```
